@@ -1,7 +1,9 @@
-import { OrderView } from "./OrderView";
-import { Catalogue } from "./Catalogue";
-import { Product } from "../domain/Product";
+import type { NextPage } from "next";
 import uuid from "short-uuid";
+
+import { Product } from "domain/order/entities/Product";
+import { Catalogue } from "components/Catalogue";
+import { OrderView } from "components/OrderView";
 
 const productsList = [
     new Product(uuid.generate(), "laptop", 3440),
@@ -9,7 +11,7 @@ const productsList = [
     new Product(uuid.generate(), "iphone 13", 2500),
 ];
 
-export function App() {
+const Home: NextPage = () => {
     return (
         <div className="App">
             <Catalogue productsList={productsList} />
@@ -17,4 +19,6 @@ export function App() {
             <OrderView />
         </div>
     );
-}
+};
+
+export default Home;

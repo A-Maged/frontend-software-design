@@ -1,3 +1,4 @@
+import uuid from "short-uuid";
 import { useSnapshot } from "valtio";
 import { Order } from "../domain/order/entities/Order";
 import { Product } from "../domain/order/entities/Product";
@@ -9,7 +10,7 @@ function useCatalogue() {
     /* application logic */
     function onAddToProductClick(product: Product) {
         /* create an order, if it doesn't exist */
-        orderStore.order = orderStore.order || new Order("id-3242");
+        orderStore.order = orderStore.order || new Order(uuid.generate());
 
         orderStore.order?.addProduct(product);
     }
