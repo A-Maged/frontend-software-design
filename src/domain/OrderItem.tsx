@@ -1,8 +1,15 @@
 import { Product } from "./Product";
+import { proxy as proxyFactory } from "valtio";
 
 export class OrderItem {
-    constructor(
-        public readonly product: Product,
-        public readonly quantity: number
-    ) {}
+    proxy: OrderItem;
+
+    constructor(public product: Product, public quantity: number) {
+        this.proxy = proxyFactory(this);
+        return this.proxy;
+    }
+
+    increaseQuantity = () => {
+        this.proxy.quantity += 1;
+    };
 }

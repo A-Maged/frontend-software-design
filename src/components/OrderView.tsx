@@ -19,11 +19,21 @@ export function OrderView() {
                         <h1>{orderItem.product.title}</h1>
                         <p>{orderItem.product.price}</p>
 
-                        <button
-                            onClick={() => order.removeOrderItem(orderItem)}
-                        >
-                            remove product
-                        </button>
+                        <div style={{ display: "flex", gap: "30px" }}>
+                            <button
+                                onClick={() =>
+                                    order.removeOrderItem(orderItem)
+                                }
+                            >
+                                remove product
+                            </button>
+
+                            <button
+                                onClick={() => orderItem.increaseQuantity()}
+                            >
+                                increase quantity ({orderItem.quantity})
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>
