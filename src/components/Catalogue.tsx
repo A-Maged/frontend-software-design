@@ -1,11 +1,10 @@
 import { useSnapshot } from "valtio";
-import { Order } from "../domain/Order";
-import { Product } from "../domain/Product";
+import { Order } from "../domain/order/entities/Order";
+import { Product } from "../domain/order/entities/Product";
 import { orderStore } from "../state/order.state";
 
 function useCatalogue() {
     const orderSnap = useSnapshot(orderStore);
-    const order = orderSnap.order;
 
     /* application logic */
     function onAddToProductClick(product: Product) {
@@ -16,7 +15,7 @@ function useCatalogue() {
     }
 
     return {
-        order,
+        order: orderSnap.order,
         onAddToProductClick,
     };
 }
