@@ -1,16 +1,16 @@
-import { proxy } from "valtio";
+import { proxy as proxyFactory } from "valtio";
 import { OrderItem } from "./OrderItem";
 import { Product } from "./Product";
 
 export class Order {
-    self: Order;
+    proxy: Order;
 
     constructor(
         public readonly id: string,
-        public readonly orderItems: OrderItem[] = []
+        public orderItems: OrderItem[] = []
     ) {
-        this.self = proxy(this);
-        return this.self;
+        this.proxy = proxyFactory(this);
+        return this.proxy;
     }
 
     addProduct = (product: Product) => {
@@ -19,7 +19,7 @@ export class Order {
         }
 
         const orderItem = new OrderItem(product, 1);
-        this.self.addOrderItem(orderItem);
+        this.proxy.addOrderItem(orderItem);
     };
 
     addOrderItem = (orderItem: OrderItem) => {
@@ -27,6 +27,18 @@ export class Order {
             throw new Error("you must pass an OrderItem");
         }
 
-        this.self.orderItems.push(orderItem);
+        this.proxy.orderItems.push(orderItem);
+    };
+
+    removeOrderItem = (orderItem: OrderItem) => {
+        this.proxy.removeProductById(orderItem.product.id);
+    };
+
+    removeProductById = (productId: Product["id"]) => {
+        const newOrderItems = this.proxy.orderItems.filter(
+            (orderItem) => orderItem.product.id !== productId
+        );
+
+        this.proxy.orderItems = newOrderItems;
     };
 }

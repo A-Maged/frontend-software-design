@@ -18,6 +18,12 @@ export function OrderView() {
                     <div key={orderItem.product.id}>
                         <h1>{orderItem.product.title}</h1>
                         <p>{orderItem.product.price}</p>
+
+                        <button
+                            onClick={() => order.removeOrderItem(orderItem)}
+                        >
+                            remove product
+                        </button>
                     </div>
                 ))}
             </div>
