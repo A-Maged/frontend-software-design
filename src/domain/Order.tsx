@@ -2,13 +2,18 @@ import { proxy as proxyFactory } from "valtio";
 import { OrderItem } from "./OrderItem";
 import { Product } from "./Product";
 
+/* Todo: make dependencies a "domain interface" that is implemented by adapters & injected at runtime  */
+import uuid from "short-uuid";
+
 export class Order {
     proxy: Order;
 
     constructor(
+        /* Todo: figure out how to make properties private without too much boilerplate */
         public readonly id: string,
         public orderItems: OrderItem[] = []
     ) {
+        /* boilerplate to make object reactive */
         this.proxy = proxyFactory(this);
         return this.proxy;
     }
@@ -18,7 +23,7 @@ export class Order {
             throw new Error("you must pass an Product");
         }
 
-        const orderItem = new OrderItem(product, 1);
+        const orderItem = new OrderItem(uuid.generate(), product, 1);
         this.proxy.addOrderItem(orderItem);
     };
 

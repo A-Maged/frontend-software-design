@@ -15,7 +15,7 @@ export function OrderView() {
 
             <div style={{ display: "flex", gap: "30px" }}>
                 {order.orderItems.map((orderItem) => (
-                    <div key={orderItem.product.id}>
+                    <div key={orderItem.id}>
                         <h1>{orderItem.product.title}</h1>
                         <p>{orderItem.product.price}</p>
 

@@ -4,7 +4,12 @@ import { proxy as proxyFactory } from "valtio";
 export class OrderItem {
     proxy: OrderItem;
 
-    constructor(public product: Product, public quantity: number) {
+    constructor(
+        public readonly id: string,
+        public product: Product,
+        public quantity: number
+    ) {
+        /* boilerplate to make object reactive */
         this.proxy = proxyFactory(this);
         return this.proxy;
     }
