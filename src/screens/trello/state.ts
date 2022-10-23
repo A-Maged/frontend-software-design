@@ -1,6 +1,6 @@
 import { proxy as proxyFactory } from "valtio";
-import { fetchTrelloData } from "./trello.api";
-import { IColumn } from "./trello.types";
+import { fetchTrelloData } from "./api";
+import { IColumn } from "./types";
 
 export class BoardState {
     proxy: BoardState;

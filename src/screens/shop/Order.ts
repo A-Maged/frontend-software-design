@@ -2,20 +2,17 @@ import { proxy as proxyFactory } from "valtio";
 import { OrderItem } from "./OrderItem";
 import { Product } from "./Product";
 
-/* Todo: make dependencies a "domain interface" that is implemented by adapters & injected at runtime  */
 import uuid from "short-uuid";
 
 export class Order {
     proxy: Order;
 
     constructor(
-        /* Todo: figure out how to make properties private without too much boilerplate */
         public readonly id: string,
-        public orderItems: OrderItem[] = []
+        public orderItems: OrderItem[] = proxyFactory([])
     ) {
         /* boilerplate to make object reactive */
-        this.proxy = proxyFactory(this);
-        return this.proxy;
+        return (this.proxy = proxyFactory(this));
     }
 
     addProduct = (product: Product) => {

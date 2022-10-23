@@ -9,7 +9,6 @@ export class Product {
         public readonly price: number
     ) {
         /* boilerplate to make object reactive */
-        this.proxy = proxyFactory(this);
-        return this.proxy;
+        return (this.proxy = proxyFactory(this));
     }
 }

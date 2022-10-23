@@ -1,9 +1,9 @@
 import { Flex } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useSnapshot } from "valtio";
-import { Card } from "./components/Card";
-import { Column } from "./components/Column";
-import { boardState } from "./trello.state";
+import { Card } from "./Card";
+import { Column } from "./Column";
+import { boardState } from "../state";
 
 export function TrelloPage() {
     const { columns, fetchData } = useSnapshot(boardState);

@@ -1,4 +1,4 @@
-import { IColumn } from "./trello.types";
+import { IColumn } from "./types";
 import uuid from "short-uuid";
 export async function fetchTrelloData(): Promise<IColumn[]> {
     await sleep(2000);

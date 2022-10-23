@@ -9,9 +9,7 @@ export class OrderItem {
         public product: Product,
         public quantity: number
     ) {
-        /* boilerplate to make object reactive */
-        this.proxy = proxyFactory(this);
-        return this.proxy;
+        return (this.proxy = proxyFactory(this));
     }
 
     increaseQuantity = () => {

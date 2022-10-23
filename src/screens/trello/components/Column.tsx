@@ -1,17 +1,15 @@
 import { VStack } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { useSnapshot } from "valtio";
-import { boardState } from "../trello.state";
+import { boardState } from "../state";
 
-export function Column({
-    columnIndex,
-    children,
-}: {
+type Props = {
     columnIndex: number;
     children: ReactNode;
-}) {
-    const { draggingState, moveCardBetweenColumns } =
-        useSnapshot(boardState);
+};
+
+export function Column({ columnIndex, children }: Props) {
+    const { draggingState, moveCardBetweenColumns } = useSnapshot(boardState);
 
     return (
         <VStack

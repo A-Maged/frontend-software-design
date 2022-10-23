@@ -1,5 +1,5 @@
 import { useSnapshot } from "valtio";
-import { orderStore } from "../state/order.state";
+import { orderStore } from "../state";
 
 export function OrderView() {
     const orderSnap = useSnapshot(orderStore);
@@ -20,17 +20,11 @@ export function OrderView() {
                         <p>{orderItem.product.price}</p>
 
                         <div style={{ display: "flex", gap: "30px" }}>
-                            <button
-                                onClick={() =>
-                                    order.removeOrderItem(orderItem)
-                                }
-                            >
+                            <button onClick={() => order.removeOrderItem(orderItem)}>
                                 remove product
                             </button>
 
-                            <button
-                                onClick={() => orderItem.increaseQuantity()}
-                            >
+                            <button onClick={() => orderItem.increaseQuantity()}>
                                 increase quantity ({orderItem.quantity})
                             </button>
                         </div>

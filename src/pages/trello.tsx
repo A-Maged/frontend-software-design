@@ -1,3 +1,3 @@
-import { TrelloPage } from "screens/trello/trello.page";
+import { TrelloPage } from "screens/trello/components/Page";
 
 export default TrelloPage;

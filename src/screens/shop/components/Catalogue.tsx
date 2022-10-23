@@ -1,13 +1,9 @@
 import uuid from "short-uuid";
-import { useSnapshot } from "valtio";
-import { Order } from "../domain/order/entities/Order";
-import { Product } from "../domain/order/entities/Product";
-import { orderStore } from "../state/order.state";
+import { Order } from "../Order";
+import { Product } from "../Product";
+import { orderStore } from "../state";
 
-function useCatalogue() {
-    const orderSnap = useSnapshot(orderStore);
-
-    /* application logic */
+export function Catalogue({ productsList }: { productsList: Product[] }) {
     function onAddToProductClick(product: Product) {
         /* create an order, if it doesn't exist */
         orderStore.order = orderStore.order || new Order(uuid.generate());
@@ -15,20 +11,9 @@ function useCatalogue() {
         orderStore.order?.addProduct(product);
     }
 
-    return {
-        order: orderSnap.order,
-        onAddToProductClick,
-    };
-}
-
-export function Catalogue({ productsList }: { productsList: Product[] }) {
-    const { order, onAddToProductClick } = useCatalogue();
-
     return (
         <div>
             <h1>Catalogue</h1>
-
-            <pre>{JSON.stringify(order, null, 4)}</pre>
 
             <div
                 style={{
