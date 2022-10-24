@@ -1,5 +1,6 @@
+import { Button, Heading } from "@chakra-ui/react";
+import { orderStore } from "modules/cart/state";
 import { useSnapshot } from "valtio";
-import { orderStore } from "../state";
 
 export function OrderView() {
     const orderSnap = useSnapshot(orderStore);
@@ -10,23 +11,22 @@ export function OrderView() {
     }
 
     return (
-        <div key={order.id}>
-            <h1>Cart</h1>
-
+        <div>
+            <Heading mb="4">Cart</Heading>
             <div style={{ display: "flex", gap: "30px" }}>
                 {order.orderItems.map((orderItem) => (
                     <div key={orderItem.id}>
-                        <h1>{orderItem.product.title}</h1>
+                        <Heading size="md">{orderItem.product.title}</Heading>
                         <p>{orderItem.product.price}</p>
 
                         <div style={{ display: "flex", gap: "30px" }}>
-                            <button onClick={() => order.removeOrderItem(orderItem)}>
+                            <Button onClick={() => order.removeOrderItem(orderItem)}>
                                 remove product
-                            </button>
+                            </Button>
 
-                            <button onClick={() => orderItem.increaseQuantity()}>
+                            <Button onClick={() => orderItem.increaseQuantity()}>
                                 increase quantity ({orderItem.quantity})
-                            </button>
+                            </Button>
                         </div>
                     </div>
                 ))}

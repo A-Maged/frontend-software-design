@@ -1,4 +1,4 @@
-import { Product } from "./Product";
+import { Product } from "../shop/Product";
 import { proxy as proxyFactory } from "valtio";
 
 export class OrderItem {
@@ -14,5 +14,12 @@ export class OrderItem {
 
     increaseQuantity = () => {
         this.proxy.quantity += 1;
+    };
+
+    decreaseQuantity = () => {
+        if (this.proxy.quantity <= 0) {
+            throw new Error("can have negar=tivre[");
+        }
+        this.proxy.quantity -= 1;
     };
 }

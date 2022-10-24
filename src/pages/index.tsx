@@ -1,3 +1,3 @@
-import { ShopPage } from "screens/shop/components/Page";
+import { ShopPage } from "screens/shop/Page";
 
 export default ShopPage;

@@ -1,6 +1,6 @@
 import { proxy as proxyFactory } from "valtio";
 import { OrderItem } from "./OrderItem";
-import { Product } from "./Product";
+import { Product } from "../shop/Product";
 
 import uuid from "short-uuid";
 
@@ -20,8 +20,16 @@ export class Order {
             throw new Error("you must pass an Product");
         }
 
-        const orderItem = new OrderItem(uuid.generate(), product, 1);
-        this.proxy.addOrderItem(orderItem);
+        const alreadyAddedProduct = this.proxy.orderItems.find(
+            (orderItem) => orderItem.id === product.id
+        );
+
+        if (alreadyAddedProduct) {
+            alreadyAddedProduct.increaseQuantity();
+        } else {
+            const orderItem = new OrderItem(product.id, product, 1);
+            this.proxy.addOrderItem(orderItem);
+        }
     };
 
     addOrderItem = (orderItem: OrderItem) => {
