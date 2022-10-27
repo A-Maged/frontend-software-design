@@ -1,9 +1,9 @@
-import { Flex } from "@chakra-ui/react";
+import { Center, Flex, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useSnapshot } from "valtio";
 import { Card } from "./Card";
 import { Column } from "./Column";
-import { boardState } from "../state";
+import { boardState } from "../../../modules/trello/state";
 
 export function TrelloPage() {
     const { columns, fetchData } = useSnapshot(boardState);
@@ -12,13 +12,17 @@ export function TrelloPage() {
         fetchData();
     }, []);
 
-    if (!columns) {
-        return "loading..";
+    if (!columns.length) {
+        return (
+            <Center h="100vh">
+                <Spinner size="xl" />
+            </Center>
+        );
     }
 
     return (
         <div>
-            <Flex gap="10px">
+            <Flex gap="40px" justifyContent="center">
                 {columns.map((column, columnIndex) => (
                     <Column key={columnIndex} columnIndex={columnIndex}>
                         {column.map((card, cardIndex) => (

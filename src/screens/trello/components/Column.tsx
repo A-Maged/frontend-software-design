@@ -1,7 +1,8 @@
 import { VStack } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { useSnapshot } from "valtio";
-import { boardState } from "../state";
+
+import { boardState } from "modules/trello/state";
 
 type Props = {
     columnIndex: number;
@@ -9,14 +10,10 @@ type Props = {
 };
 
 export function Column({ columnIndex, children }: Props) {
-    const { draggingState, moveCardBetweenColumns } = useSnapshot(boardState);
+    const { columns, draggingState, moveCardBetweenColumns } = useSnapshot(boardState);
 
     return (
         <VStack
-            align="start"
-            border="2px solid black"
-            p="2"
-            h="100%"
             data-column-index={columnIndex}
             onDrop={(e) => {
                 const targetColumnIndex = Number(
@@ -27,13 +24,19 @@ export function Column({ columnIndex, children }: Props) {
                     draggingState.sourceColumnIndex!,
                     draggingState.cardIndex!,
                     targetColumnIndex,
-                    0 // Todo
+                    columns[targetColumnIndex].length // Todo
                 );
             }}
             onDragOver={(e) => {
                 /* allow drop */
                 e.preventDefault();
             }}
+            align="start"
+            w="30vw"
+            border="2px solid black"
+            p="4"
+            my="5vh"
+            h="90vh"
         >
             {children}
         </VStack>

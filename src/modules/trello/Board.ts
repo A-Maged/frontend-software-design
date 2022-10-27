@@ -1,5 +1,7 @@
 import { proxy as proxyFactory } from "valtio";
-import { fetchTrelloData } from "./api";
+
+import { fakeAsync } from "modules/core/sleep";
+import { data } from "./data";
 import { IColumn } from "./types";
 
 export class Board {
@@ -19,7 +21,8 @@ export class Board {
     }
 
     fetchData = async () => {
-        this.proxy.columns = await fetchTrelloData();
+        /* simulate an async http request */
+        this.proxy.columns = await fakeAsync(2000, data);
     };
 
     setDraggingState = (sourceColumnIndex: number, cardIndex: number) => {
