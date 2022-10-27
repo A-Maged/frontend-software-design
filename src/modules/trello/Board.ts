@@ -22,7 +22,7 @@ export class Board {
 
     fetchData = async () => {
         /* simulate an async http request */
-        this.proxy.columns = await fakeAsync(2000, data);
+        this.proxy.columns = await fakeAsync(1000, data);
     };
 
     setDraggingState = (sourceColumnIndex: number, cardIndex: number) => {

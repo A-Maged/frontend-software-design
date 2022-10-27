@@ -1,20 +1,15 @@
-import uuid from "short-uuid";
-
-import { orderStore } from "modules/cart/state";
-import { Order } from "modules/cart/Order";
+import { Heading, Text } from "@chakra-ui/react";
 import { Product } from "modules/shop/Product";
-import { Button, Heading } from "@chakra-ui/react";
+import { ProductCard } from "./ProductCard";
 
 export function Catalogue({ productsList }: { productsList: Product[] }) {
-    function onAddToProductClick(product: Product) {
-        /* Todo: make modules loosely coupled. 
-           sendDomainEvent(AddProductToCartEvent, product) */
-        orderStore.order?.addProduct(product);
-    }
-
     return (
         <div>
-            <h1>Catalogue</h1>
+            <Heading my="4">Catalogue</Heading>
+
+            <Text as="ul" mb="6">
+                <li>Subsequent clicks on "Add to cart" button, will increase quantity</li>
+            </Text>
 
             <div
                 style={{
@@ -23,14 +18,7 @@ export function Catalogue({ productsList }: { productsList: Product[] }) {
                 }}
             >
                 {productsList.map((product) => (
-                    <div key={product.id}>
-                        <Heading size="md">{product.title}</Heading>
-                        <p>{product.price}</p>
-
-                        <Button onClick={() => onAddToProductClick(product)}>
-                            Add to cart
-                        </Button>
-                    </div>
+                    <ProductCard key={product.id} product={product} />
                 ))}
             </div>
         </div>

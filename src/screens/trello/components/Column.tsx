@@ -35,8 +35,7 @@ export function Column({ columnIndex, children }: Props) {
             w="30vw"
             border="2px solid black"
             p="4"
-            my="5vh"
-            h="90vh"
+            h="80vh"
         >
             {children}
         </VStack>

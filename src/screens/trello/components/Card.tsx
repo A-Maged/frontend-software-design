@@ -18,6 +18,7 @@ export function Card({ card, cardIndex, columnIndex }: Props) {
         <Box
             draggable
             bg={card.bgColor}
+            color="white"
             p="10px"
             w="full"
             border="1px solid black"
@@ -25,7 +26,6 @@ export function Card({ card, cardIndex, columnIndex }: Props) {
                 setDraggingState(columnIndex, cardIndex);
             }}
         >
-            <br />
             {card.title}
             {card.description}
         </Box>

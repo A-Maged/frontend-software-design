@@ -1,4 +1,4 @@
-import { Center, Flex, Spinner } from "@chakra-ui/react";
+import { Center, Container, Flex, Heading, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useSnapshot } from "valtio";
 import { Card } from "./Card";
@@ -21,8 +21,12 @@ export function TrelloPage() {
     }
 
     return (
-        <div>
-            <Flex gap="40px" justifyContent="center">
+        <Container maxW="1920px">
+            <Heading mb="4" textAlign="center" my="6">
+                Drag cards between columns
+            </Heading>
+
+            <Flex justifyContent="space-between">
                 {columns.map((column, columnIndex) => (
                     <Column key={columnIndex} columnIndex={columnIndex}>
                         {column.map((card, cardIndex) => (
@@ -36,6 +40,6 @@ export function TrelloPage() {
                     </Column>
                 ))}
             </Flex>
-        </div>
+        </Container>
     );
 }

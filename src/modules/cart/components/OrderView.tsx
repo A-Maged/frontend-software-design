@@ -1,34 +1,35 @@
-import { Button, Heading } from "@chakra-ui/react";
-import { orderStore } from "modules/cart/state";
+import { Heading, Text } from "@chakra-ui/react";
 import { useSnapshot } from "valtio";
 
+import { orderStore } from "modules/cart/state";
+import { OrderItemCard } from "./OrderItemCard";
+
 export function OrderView() {
-    const orderSnap = useSnapshot(orderStore);
-    const order = orderSnap.order;
+    const order = useSnapshot(orderStore);
 
     if (!order || !order?.orderItems.length) {
-        return <h1>Cart is empty</h1>;
+        return <Heading>Cart is empty</Heading>;
     }
 
     return (
         <div>
-            <Heading mb="4">Cart</Heading>
+            <Heading mb="4">
+                <span>Cart </span>
+                <Text fontSize="md" as="span">
+                    (Total: {order.price})
+                </Text>
+            </Heading>
+
+            <Text as="ul" mb="6">
+                <li>Increasing the quantity will increase the price</li>
+                <li>
+                    Decreasing the quantity to zero, will remove the product from cart
+                </li>
+            </Text>
+
             <div style={{ display: "flex", gap: "30px" }}>
                 {order.orderItems.map((orderItem) => (
-                    <div key={orderItem.id}>
-                        <Heading size="md">{orderItem.product.title}</Heading>
-                        <p>{orderItem.product.price}</p>
-
-                        <div style={{ display: "flex", gap: "30px" }}>
-                            <Button onClick={() => order.removeOrderItem(orderItem)}>
-                                remove product
-                            </Button>
-
-                            <Button onClick={() => orderItem.increaseQuantity()}>
-                                increase quantity ({orderItem.quantity})
-                            </Button>
-                        </div>
-                    </div>
+                    <OrderItemCard key={orderItem.id} orderItem={orderItem} />
                 ))}
             </div>
         </div>

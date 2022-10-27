@@ -12,6 +12,10 @@ export class OrderItem {
         return (this.proxy = proxyFactory(this));
     }
 
+    get price() {
+        return this.product.price * this.quantity;
+    }
+
     increaseQuantity = () => {
         this.proxy.quantity += 1;
     };

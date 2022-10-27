@@ -15,6 +15,10 @@ export class Order {
         return (this.proxy = proxyFactory(this));
     }
 
+    get price() {
+        return this.orderItems.reduce((total, item) => (total += item.price), 0);
+    }
+
     addProduct = (product: Product) => {
         if (!(product instanceof Product)) {
             throw new Error("you must pass an Product");
